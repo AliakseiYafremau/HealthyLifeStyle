@@ -1,16 +1,16 @@
 # HealthyLifeStyle
-## О проекте
-Проект представляет из себя платформу для выбора здоровой еды по методу Гарвардской тарелки. API дает возможность создания, изменения и удаления половинок тарелок; лайкать понравившиеся блюда, писать рецензии. Блюда можно фильтровать и сортировать по тегам и категориям. Кроме того, администраторы имеют возможность писать новости и статьи. Пользователь регистрируется через код, который быть отправлен как по электронной почте, так и по SMS. 
+## About the Project
+The project is a platform for choosing healthy food based on the Harvard Plate Method. The API allows users to create, modify, and delete plate halves, like favorite dishes, and write reviews. Dishes can be filtered and sorted by tags and categories. Additionally, administrators can post news and articles. Users register via a code that can be sent either via email or SMS.
 
-__[Ссылка](https://github.com/Healthy-lifestyle-team-1) на организацию проекта__
+__[Link](https://github.com/Healthy-lifestyle-team-1) to the project organization__
 
-### Клонируйте репозиторий с GitHub и переключитесь на директорию проекта
+### Clone the repository from GitHub and navigate to the project directory
 ```commandline
 git clone https://github.com/Healthy-lifestyle-team-1/Back
 cd HealthyLifeStyle
 ```
 
-### Создайте файл .env в корневой папке и укажите свои переменные для почтовых и СМС отправлений:
+### Create a `.env` file in the root folder and specify your variables for email and SMS services
 ```env
 EMAIL_HOST=''
 EMAIL_PORT=
@@ -22,17 +22,17 @@ SMSC_LOGIN=''
 SMSC_PASSWORD=''
 ```
 
-### Активируйте виртуальное окружение проекта:
+### Activate the project's virtual environment
 ```commandline
 pip install -r ../requirements.txt
 ```
 
-### Сделайте миграции:
+### Run migrations
 ```commandline
 python manage.py migrate
 ```
 
-### Запустите сервер:
+### Start the server
 
 ```commandline
 python manage.py runserver
@@ -40,30 +40,40 @@ python manage.py runserver
 ---
 
 
-# Модели
+# Models
 
-## ```admin/```
-Вход в админ панель.
+### ```admin/```
+Access to the admin panel.
 
 ### ```category/```
-ПРОСМОТР: ВСЕ   
-СОЗДАНИЕ: ТОЛЬКО АДМИН   
-Создание и просмотр категорий.   
-Запрашивает такие аргументы как:
+VIEW: ALL
+
+CREATE: ADMIN ONLY
+
+Create and view categories.
+
+Required arguments:
 * ```name```
 
 ### ```tag/```
-ПРОСМОТР: ВСЕ   
-СОЗДАНИЕ: ТОЛЬКО АДМИН   
-Создание и просмотр тег.   
-Запрашивает такие аргументы как:
+VIEW: ALL
+
+CREATE: ADMIN ONLY
+
+Create and view tags.
+
+Required arguments:
 * ```name```
 
 ### ```product/```
-ПРОСМОТР: ВСЕ   
-СОЗДАНИЕ: ТОЛЬКО АДМИН   
-Создание и просмотр тарелок.   
-Запрашивает такие аргументы как:
+VIEW: ALL
+
+CREATE: ADMIN ONLY
+
+Create and view plates.
+
+Required arguments:
+
 * ```title```
 * ```subtitle```
 * ```category```
@@ -82,74 +92,85 @@ python manage.py runserver
 * ```is_prepared```
 
 ### ```rating/```
-ПРОСМОТР: ВСЕ   
-СОЗДАНИЕ: ТОЛЬКО АДМИН   
-Создание и просмотр рейтинга.   
-Запрашивает такие аргументы как:
+VIEW: ALL
+
+CREATE: ADMIN ONLY
+
+Create and view ratings.
+
+Required arguments:
 * ```dishhalf```
 * ```user```
 * ```value```
 
 ### ```likes/```
-ПРОСМОТР: ВСЕ   
-СОЗДАНИЕ: ПОЛЬЗОВАТЕЛИ   
-Создание и просмотр аллергий.   
-Запрашивает такие аргументы как:
+VIEW: ALL
+
+CREATE: USERS
+
+Create and view allergies.
+
+Required arguments:
 * ```user```
 * ```product```
 
 ### ```article/```
-ПРОСМОТР: ВСЕ   
-СОЗДАНИЕ: ТОЛЬКО АДМИН   
-Создание и просмотр статьи.   
-Запрашивает такие аргументы как:
+VIEW: ALL
+
+CREATE: ADMIN ONLY
+
+Create and view articles.
+
+Required arguments:
 * ```author```
 * ```text```
 
 ### ```news/```
-ПРОСМОТР: ВСЕ   
-СОЗДАНИЕ: ТОЛЬКО АДМИН   
-Создание и просмотр новостей.   
-Запрашивает такие аргументы как:
+VIEW: ALL
+
+CREATE: ADMIN ONLY
+
+Create and view news.
+
+Required arguments:
 * ```author```
 * ```text```
 
 ### ```cart/```
-ПРОСМОТР: АУДЕНТИФИЦИРОВАННЫЙ ПОЛЬЗОВАТЕЛЬ   
-СОЗДАНИЕ: АВТОМАТИЧЕСКИ ПРИ РЕГИСТРАЦИИ   
-Создание и просмотр корзины пользователя.   
-Запрашивает такие аргументы как:
+VIEW: AUTHENTICATED USERS
+
+CREATE: AUTOMATICALLY UPON REGISTRATION
+
+Create and view user carts.
+
+Required arguments:
 * ```user```
 * ```created_at```
 
 ### ```cart_item/```
-ПРОСМОТР: АУДЕНТИФИЦИРОВАННЫЙ ПОЛЬЗОВАТЕЛЬ   
-СОЗДАНИЕ: АВТОМАТИЧЕСКИ ПРИ РЕГИСТРАЦИИ   
-Создание и просмотр позиции продукта в корзине.   
-Запрашивает такие аргументы как:
+VIEW: AUTHENTICATED USERS
+
+CREATE: AUTOMATICALLY UPON REGISTRATION
+
+Create and view product items in the cart.
+
+Required arguments:
 * ```cart```
 * ```product```
 * ```quantity```
 
-## Регистрация и учётные данные пользователя
+## User Registration & Authentication
 
 ### ```login/```
-Регистрация и аутентификация пользователя.   
-Аргументы:
+User registration and authentication.
+Arguments:
 * ```login```
 * ```username```
 
 ### ```verify/```
-Подтверждение учетной записи.   
-Аргументы:
+Account verification.
+Arguments:
 * ```code```
 
 ### ```logout/```
-Выход из учетной записи. Не запрашивает аргументов.
-
-### ```user/```
-Просмотр и изменение информации пользователя.   
-Аргументы:
-* ```username```
-* ```phone```
-* ```email```
+Log out of the account. No arguments required.
